@@ -18,7 +18,7 @@ def read_from_file(filename):
 
 def write_to_file(filename, data_list):
     file = open(filename, "wb")
-    pickle.dump(data_list, file)
+    pickle.dump(data_list,file)
     file.close()
 
 

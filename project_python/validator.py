@@ -1,3 +1,4 @@
+import re
 def sim_validator(sim):
     errors = []
     if not (type(sim[0]) == int and sim[0] > 0):
