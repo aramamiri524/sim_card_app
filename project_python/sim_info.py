@@ -1,8 +1,60 @@
 from tkinter import *
 import tkinter.ttk as ttk
-import tkinter.messagebox as ms
+import tkinter.messagebox as msg
 from file_manager import *
 from validator import *
+
+sim_list = read_from_file("sims.dat")
+
+#بارگذاری داده ها در جدول
+def load_data(sim_list):
+    sim_list = read_from_file("sims.dat")
+    for row in table.get_children():
+        table.delete(row)
+
+    for sim in sim_list:
+        table.insert("", END, values=sim)
+
+#بازنشانی فرم(آیدی جدید تولید میشود و بقیه ی موارد خالی یا صفر میشوند ،جدول دوباره باز نشانی میشود)
+def reset_form():
+    id.set(len(sim_list) + 1)
+    number.set("")
+    operator.set("")
+    price.set(0)
+    charge.set(0)
+    owner.set("")
+    load_data(sim_list)
+
+#ذخیره سازی اطلاعات جدید
+def save_btn_click():
+    sim = (id.get(), number.get(), operator.get(), price.get(), charge.get(), owner.get())
+    errors = sim_validator(sim)
+    if errors:
+        msg.showerror("Errors", "\n".join(errors))
+    else:
+        msg.showinfo("Saved", "Sim card saved")
+        sim_list.append(sim)
+        write_to_file("sims.dat", sim_list)
+        reset_form()
+
+#انتخاب ردیف از جدول برای ویرایش و بررسی
+def table_select(x):
+    selected_sim = table.item(table.focus())["values"]
+    if selected_sim:
+        id.set(selected_sim[0])
+        number.set(selected_sim[1])
+        operator.set(selected_sim[2])
+        price.set(selected_sim[3])
+        charge.set(selected_sim[4])
+        owner.set(selected_sim[5])
+
+#تابع ویرایش
+def edit_btn_click():
+    pass
+
+#تابع حذف
+def remove_btn_click():
+    pass
 
 #یک پنجره اصلی با عنوان و اندازه مشخص ساخته میشود
 window = Tk()
