@@ -76,7 +76,7 @@ def remove_btn_click():
 # یک پنجره اصلی با عنوان و اندازه مشخص ساخته میشود
 window = Tk()
 window.title("Sim Card Registration")
-window.geometry("920x350")
+window.geometry("960x350")
 
 # تعریف و جایگذاری فایلها
 Label(window, text="Id").place(x=20, y=20)
@@ -104,7 +104,7 @@ owner = StringVar()
 Entry(window, textvariable=owner,width=32).place(x=80, y=220)
 
 # Table
-table = ttk.Treeview(window, columns=[1, 2, 3, 4, 5, 6], show="headings")
+table = ttk.Treeview(window, columns=[1, 2, 3, 4, 5, 6], show="headings", height=14)
 table.heading(1, text="Id")
 table.heading(2, text="Number")
 table.heading(3, text="Operator")
